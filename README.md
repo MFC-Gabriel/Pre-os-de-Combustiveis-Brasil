@@ -7,7 +7,8 @@
 **Autoria** · Gabriel de Moraes Ferreira Campos  
 **Professor** · Alexandre Neves Louzada  
 **Curso** · Bacharelado em Sistemas de Informação, 8º período  
-**Disciplina** · Linguagens de programação
+**Disciplina** · Linguagens de programação  
+**Link da Pagina WEB** https://mfc-gabriel.github.io/Pre-os-de-Combustiveis-Brasil/
 
 O projeto analisa preços mensais de revenda em três escalas geográficas. A gasolina comum atingiu R$ 7,28/L na média nacional em maio de 2022. Entre as UFs, a distância entre as médias anuais extremas de 2022 chegou a R$ 1,03/L. No mesmo ano, o preço médio do etanol ficou em até 70% do preço da gasolina comum em 5 de 12 meses no Centro-Oeste e em 3 de 12 no Sudeste.
 
