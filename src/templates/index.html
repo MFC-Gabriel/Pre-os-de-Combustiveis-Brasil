@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{titulo_trabalho}} | {{tema_trabalho}}</title>
+  <meta name="description" content="Análise reprodutível dos preços mensais de revenda de combustíveis no Brasil, nas regiões e nas unidades federativas entre 2001 e 2023.">
+  <meta name="author" content="{{autores}}">
+  <meta name="keywords" content="preços de combustíveis, gasolina comum, etanol, séries temporais, ciência aberta">
+  <meta name="theme-color" content="#f7f7ef">
+  <script type="application/ld+json">{{metadados}}</script>
+  <style>{{css}}</style>
+</head>
+<body id="inicio">
+  <a class="skip" href="#conteudo">Ir para o artigo</a>
+  <header>
+    <div class="topbar">
+      <div class="wrap">
+        <a class="course" href="#inicio"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>{{disciplina}}</a>
+        <nav class="top-actions" aria-label="Acesso rápido">
+          <a href="#resultados">Resultados</a>
+          {{botao_repo}}
+        </nav>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <p class="context">{{titulo_trabalho}} · Análise e visualização de dados com Python</p>
+          <h1>{{tema_trabalho}}</h1>
+          <p class="subtitle">Séries mensais de revenda de {{inicio_extenso}} a {{fim_extenso}}</p>
+          <div class="author-block">
+            <p class="author">{{autores}}</p>
+            <p class="affiliation">Professor {{professor}}</p>
+            <p class="affiliation">{{filiacao}}</p>
+            {{semestre}}
+          </div>
+        </div>
+        <figure class="hero-data">
+          <div>
+            <h2>Gasolina comum no Brasil</h2>
+            <p class="value">{{pico_preco}}</p>
+            <p class="value-note">Maior média mensal · {{pico_mes}} · por litro</p>
+          </div>
+          <img src="{{sparkline}}" width="1140" height="342" alt="A série nacional sobe ao pico de maio de 2022 e cai no segundo semestre.">
+          <figcaption><span>jan/2021</span><span>jan/2023</span></figcaption>
+        </figure>
+      </div>
+      <dl class="indicators" aria-label="Cobertura do conjunto de dados">
+        <div><dt>{{meses}}</dt><dd>meses observados</dd></div>
+        <div><dt>{{ufs}}</dt><dd>unidades federativas</dd></div>
+        <div><dt>{{produtos}}</dt><dd>combustíveis</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="wrap article-grid">
+    <aside class="toc">
+      <nav aria-labelledby="sumario">
+        <h2 id="sumario">Sumário</h2>
+        <ol>
+          <li><a href="#intro"><span>1</span> Introdução</a></li>
+          <li><a href="#metodologia"><span>2</span> Metodologia</a></li>
+          <li><a href="#resultados"><span>3</span> Resultados</a></li>
+          <li><a href="#conclusao"><span>4</span> Conclusão</a></li>
+          <li><a href="#fair"><span>5</span> Dados e princípios FAIR</a></li>
+          <li><a href="#referencias"><span>6</span> Referências</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="article-body" id="conteudo">
+      <article aria-label="Artigo acadêmico">
+        <section aria-labelledby="resumo">
+          <h2 class="section-title" id="resumo">Resumo</h2>
+          <p>Os preços de revenda de combustíveis afetam o orçamento de quem se desloca e os custos de transporte de mercadorias. Este estudo analisa três arquivos mensais que abrangem o Brasil, cinco regiões e 27 unidades federativas entre {{inicio_extenso}} e {{fim_extenso}}. Com Python, pandas e NumPy, o tratamento validou datas, chaves geográficas e faixas de preço. As lacunas foram preservadas, e os registros sem identificação foram documentados. A análise combinou séries temporais, médias anuais, variações mensais e a razão entre os preços médios do etanol hidratado e da gasolina comum.</p>
+          <p>A gasolina atingiu o maior preço médio nacional da série em {{pico_mes}}, a {{pico_preco}} por litro, e fechou o ano em {{dez_preco}}. Em {{ano}}, a diferença entre as médias anuais regionais extremas foi de {{amplitude_regional}} por litro. Entre unidades federativas, a diferença chegou a {{amplitude_ufs}}. A razão etanol/gasolina ficou em até 70% em {{ratio_co}} meses no Centro-Oeste e em {{ratio_se}} no Sudeste. Os resultados mostram que o recorte geográfico importa tanto para comparar preços quanto para interpretar a relação entre os dois combustíveis. O código, o dicionário de dados e as visualizações permitem reproduzir a análise a partir do arquivo fornecido.</p>
+          <p class="keywords"><strong>Palavras-chave</strong> · Preços de combustíveis, gasolina comum, etanol hidratado, séries temporais, ciência aberta.</p>
+        </section>
+
+        <section id="intro" aria-labelledby="titulo-intro">
+          <h2 class="section-title" id="titulo-intro">1. Introdução</h2>
+          <p>Uma média nacional ajuda a acompanhar o preço na bomba ao longo do tempo. Para comparar o que acontece em diferentes mercados, é preciso observar também as séries regionais e estaduais. O Levantamento de Preços de Combustíveis da ANP oferece a referência para interpretar essas escalas e suas diferenças de cobertura (ANP, 2020a, 2020b).</p>
+          <p>O estudo examina sete produtos e aprofunda a comparação entre gasolina comum e etanol hidratado, que têm a mesma unidade de medida. As comparações geográficas em destaque usam {{ano}}, o último ano completo nos três arquivos analisados.</p>
+          <ol class="questions">
+            <li><strong>RQ1.</strong> Como evoluiu o preço médio nacional da gasolina comum e quais variações mensais se destacaram?</li>
+            <li><strong>RQ2.</strong> Quanto variou o preço médio anual da gasolina comum entre regiões e UFs em {{ano}}?</li>
+            <li><strong>RQ3.</strong> Em quantos meses de {{ano}} a razão de preços etanol/gasolina foi de até 70% em cada região?</li>
+          </ol>
+        </section>
+
+        <section id="metodologia" aria-labelledby="titulo-metodologia">
+          <h2 class="section-title" id="titulo-metodologia">2. Metodologia e pipeline</h2>
+          <h3>Base de dados e granularidade</h3>
+          <p>Os cálculos partem dos CSV fornecidos em <code>archive.zip</code>. Cada linha bruta reúne preços médios, mínimos e máximos de revenda de até sete combustíveis, por mês e território. A série mensal da ANP é a fonte oficial de referência (ANP, 2020a). Os valores de junho a setembro de 2022 para gasolina comum no Brasil coincidem com a tabela do boletim do 3º trimestre de 2022 (ANP, 2022). A versão de origem dos CSV segue sem identificação no arquivo fornecido.</p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Inventário dos arquivos brutos">
+            <table>
+              <thead><tr><th scope="col">Arquivo</th><th scope="col">Unidade de observação</th><th scope="col" class="num">Linhas brutas</th><th scope="col" class="num">Linhas válidas</th></tr></thead>
+              <tbody>{{tabela_inventario}}</tbody>
+            </table>
+          </div>
+
+          <h3>Limpeza e verificação</h3>
+          <p>Os CSV usam UTF-8, vírgula como separador e ponto como separador decimal. O pipeline converte <code>referencia</code> em data mensal, confere ano e mês, padroniza nomes geográficos e valida unicidade por mês e território. Os preços são numéricos e positivos, com mínimo menor ou igual à média e média menor ou igual ao máximo. Os sete produtos são reorganizados em formato longo, com unidade de medida e linha de origem. O painel resultante contém <strong>{{painel_linhas}}</strong> combinações de mês, território e combustível.</p>
+          <div class="note">
+            <p><strong>Lacunas da série.</strong> Setembro de 2020 está ausente nos três arquivos. O período coincide com a interrupção da coleta registrada pela ANP entre agosto e outubro de 2020 (ANP, 2020b). As {{quarentena}} linhas estaduais sem mês e UF foram mantidas em <code>linhas_em_quarentena.csv</code>. O Amapá tem {{ap_lacunas}} meses a menos que as demais UFs. A ligação entre essas duas ocorrências exigiria a confirmação das chaves na fonte.</p>
+          </div>
+          <p>Células sem preço permanecem vazias. A cobertura muda conforme o produto, especialmente para gasolina aditivada, diesel S10 e GNV. O relatório <code>qualidade.json</code> registra cobertura, lacunas e hashes SHA-256 dos CSV brutos.</p>
+          <details>
+            <summary>Consultar a cobertura dos sete combustíveis</summary>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Cobertura por combustível e nível geográfico">
+              <table>
+                <caption>Preços médios disponíveis entre os registros com mês e território válidos.</caption>
+                <thead><tr><th scope="col">Produto</th><th scope="col" class="num">Brasil</th><th scope="col" class="num">Regiões</th><th scope="col" class="num">UFs</th></tr></thead>
+                <tbody>{{tabela_cobertura}}</tbody>
+              </table>
+            </div>
+          </details>
+
+          <h3>Cálculo das métricas</h3>
+          <p>A série nacional é alinhada ao calendário. A média móvel exige 12 meses consecutivos com preço, e a variação mensal exige um par de meses consecutivos. As variações extremas são sinalizadas pelos limites de Tukey, calculados a 1,5 vezes o intervalo interquartil abaixo do primeiro quartil e acima do terceiro quartil. A correlação de Pearson usa variações mensais pareadas.</p>
+          <p>As médias anuais são aritméticas, com o mesmo peso para cada um dos 12 meses. Os agregados nacional e regionais são tomados de seus próprios CSV. Para a comparação entre combustíveis, divide-se o preço médio do etanol pelo preço médio da gasolina comum no mesmo mês e território.</p>
+          <pre><code>{{trecho_python}}</code></pre>
+        </section>
+
+        <section id="resultados" aria-labelledby="titulo-resultados">
+          <h2 class="section-title" id="titulo-resultados">3. Resultados e discussão</h2>
+
+          <h3>RQ1. Evolução nacional da gasolina comum</h3>
+          <p>A média da gasolina comum passou de {{primeiro_preco}} por litro em {{inicio_extenso}} para {{ultimo_preco}} em {{fim_extenso}}. O pico da série ocorreu em {{pico_mes}}, a {{pico_preco}}. Em julho de 2022, houve queda de {{maior_queda_abs}} frente a junho, a maior da série na comparação mês a mês. A média de dezembro ficou {{pico_dez_queda_abs}} abaixo do pico. Como os valores são nominais, a variação de longo prazo inclui a inflação do período.</p>
+          <figure class="chart-card" aria-labelledby="fig1-titulo" aria-describedby="fig1-legenda">
+            <div class="chart-heading">
+              <div><p class="eyebrow">Figura 1</p><h4 id="fig1-titulo">Série mensal por combustível no Brasil</h4></div>
+              <div class="controls" id="serie-controles" hidden>
+                <label>Combustível<select id="essencia">{{opcoes_produto}}</select></label>
+                <label>Período<select id="serie-periodo">
+                  <option value="todos">Série completa</option>
+                  <option value="2020">2020–2023</option>
+                  <option value="2010">2010–2019</option>
+                  <option value="2001">2001–2009</option>
+                </select></label>
+              </div>
+            </div>
+            <ul class="legend" id="serie-legenda" hidden>
+              <li><span class="swatch"></span>Preço médio mensal</li>
+              <li><span class="swatch dashed" style="--sample: #a75432"></span>Média móvel de 12 meses</li>
+            </ul>
+            <div class="plot" id="serie-plot"></div>
+            <p class="plot-status" id="serie-status">A tabela contém os valores mensais de gasolina comum.</p>
+            <details>
+              <summary>Consultar valores da série</summary>
+              <div class="table-wrap bucket" tabindex="0" role="region" aria-label="Valores da série nacional selecionada">
+                <table>
+                  <thead><tr><th scope="col">Mês</th><th scope="col" class="num" id="serie-unidade">Preço médio (R$/L)</th><th scope="col" class="num">Média móvel</th></tr></thead>
+                  <tbody id="serie-tabela">{{tabela_serie}}</tbody>
+                </table>
+              </div>
+            </details>
+            <figcaption id="fig1-legenda">Valores nominais. Cada combustível usa sua própria unidade. Os trechos em branco correspondem a preços ausentes ou a janelas incompletas da média móvel.</figcaption>
+          </figure>
+          <p>O critério interquartil marcou <strong>{{outliers}}</strong> entre {{variacoes_validas}} variações da gasolina, com limites de {{iqr_inferior}} e {{iqr_superior}}. A maior alta mensal foi de {{maior_alta}} em {{maior_alta_mes}}. As variações sinalizadas permanecem na série. Os preços de gasolina e etanol apresentaram correlação de Pearson de <strong>{{correlacao}}</strong> em {{pares_correlacao}} pares de variações mensais. O resultado indica movimento conjunto frequente, com magnitudes que podem divergir entre os combustíveis.</p>
+          <figure class="chart-card" aria-labelledby="fig2-titulo">
+            <div class="chart-heading">
+              <div><p class="eyebrow">Figura 2</p><h4 id="fig2-titulo">Distribuição das variações mensais da gasolina comum</h4></div>
+            </div>
+            <img class="static-chart" loading="lazy" src="{{histograma}}" width="1900" height="760" alt="Histograma com maior concentração perto de zero. Linhas tracejadas marcam {{iqr_inferior}} e {{iqr_superior}}. Julho de 2022 destaca-se com queda de {{maior_queda_abs}}.">
+            <figcaption>Classes de 1 ponto percentual. As linhas tracejadas demarcam os limites de Tukey. A queda de julho de 2022 aparece em laranja.</figcaption>
+          </figure>
+          <p>O boletim da ANP também registra queda do preço de distribuição da gasolina comum no terceiro trimestre de 2022 (ANP, 2022). Os CSV estudados trazem preços de revenda agregados. Para investigar a contribuição de fatores como tributação, produção e distribuição, seria necessário incorporar essas outras séries.</p>
+
+          <h3>RQ2. Diferenças regionais e estaduais em {{ano}}</h3>
+          <p>Entre regiões, a média anual mais alta foi a do <strong>{{maior_regiao}}</strong>, a {{maior_regiao_preco}} por litro. O <strong>{{menor_regiao}}</strong> teve a menor, a {{menor_regiao_preco}}. A distância entre esses valores foi de {{amplitude_regional}}. Entre as {{ufs}} UFs, a distância de <strong>{{maior_uf}}</strong> ({{maior_uf_preco}}) a <strong>{{menor_uf}}</strong> ({{menor_uf_preco}}) chegou a {{amplitude_ufs}}. A mediana das médias estaduais foi de {{mediana_uf}}, com desvio-padrão amostral de {{desvio_uf}} e intervalo interquartil de {{iqr_uf}} por litro.</p>
+          <figure class="chart-card" aria-labelledby="fig3-titulo" aria-describedby="fig3-legenda">
+            <div class="chart-heading">
+              <div><p class="eyebrow">Figura 3</p><h4 id="fig3-titulo">Média anual da gasolina comum</h4></div>
+              <div class="controls" id="geo-controles" hidden>
+                <label>Ano<select id="geo-ano">{{opcoes_ano}}</select></label>
+                <label>Abrangência<select id="geo-nivel"><option value="regioes">Regiões</option><option value="ufs">Unidades federativas</option></select></label>
+              </div>
+            </div>
+            <div class="plot" id="geo-plot"></div>
+            <p class="plot-status" id="geo-status">Brasil em {{ano}}: {{media_nacional}} por litro.</p>
+            <details>
+              <summary>Consultar médias por território</summary>
+              <div class="table-wrap bucket" tabindex="0" role="region" aria-label="Tabela de médias geográficas de gasolina comum">
+                <table>
+                  <thead><tr><th scope="col">Território</th><th scope="col" class="num">Média anual (R$/L)</th></tr></thead>
+                  <tbody id="geo-tabela">{{tabela_geo}}</tbody>
+                </table>
+              </div>
+            </details>
+            <figcaption id="fig3-legenda">Cada ponto é uma média de 12 meses. A linha vertical indica a média nacional no ano selecionado. O eixo horizontal é ajustado à faixa dos valores para facilitar a comparação.</figcaption>
+          </figure>
+          <p>O detalhamento por UF revela uma dispersão maior que a observada nas cinco médias regionais. Essa diferença evidencia o efeito da agregação geográfica. Os arquivos resumidos preservam as médias de cada escala e oferecem pouca informação sobre a dispersão de preços entre postos dentro de cada UF.</p>
+
+          <h3>RQ3. Relação entre etanol e gasolina em {{ano}}</h3>
+          <p>No Brasil, a razão ficou em até 70% em <strong>{{ratio_br}} de 12 meses</strong>. Entre as regiões, o Centro-Oeste registrou {{ratio_co}} meses e o Sudeste, {{ratio_se}}. Norte, Nordeste e Sul passaram os 12 meses acima do limiar. No nível estadual, {{ratio_uf_qualquer}} UFs atingiram o limiar pelo menos uma vez, totalizando {{ratio_uf_baixas}} de {{ratio_uf_pares}} pares UF–mês.</p>
+          <figure class="chart-card" aria-labelledby="fig4-titulo" aria-describedby="fig4-legenda">
+            <div class="chart-heading">
+              <div><p class="eyebrow">Figura 4</p><h4 id="fig4-titulo">Razão mensal etanol/gasolina</h4></div>
+              <div class="controls" id="ratio-controles" hidden>
+                <label>Ano<select id="ratio-ano">{{opcoes_ano}}</select></label>
+                <label>Território<select id="ratio-territorio">
+                  <option value="regioes">Todas as regiões</option>
+                  <option value="Brasil">Brasil</option>
+                  {{opcoes_regiao}}
+                </select></label>
+              </div>
+            </div>
+            <div class="plot" id="ratio-plot"></div>
+            <p class="plot-status" id="ratio-status">A linha de referência indica 70%.</p>
+            <details>
+              <summary>Consultar os valores mensais</summary>
+              <div class="table-wrap bucket" tabindex="0" role="region" aria-label="Razão percentual de preços por mês e território">
+                <table id="ratio-tabela">{{tabela_ratio}}</table>
+              </div>
+            </details>
+            <figcaption id="fig4-legenda">Preço médio do etanol dividido pelo preço médio da gasolina comum no mesmo mês e território. A referência de 70% está em linha tracejada.</figcaption>
+          </figure>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Frequência anual de razões de até 70 por cento">
+            <table>
+              <caption>Frequência de meses com razão etanol/gasolina de até 70% em {{ano}}.</caption>
+              <thead><tr><th scope="col">Território</th><th scope="col" class="num">Meses no limiar</th><th scope="col" class="num">Média das razões</th></tr></thead>
+              <tbody>{{tabela_ratio_anual}}</tbody>
+            </table>
+          </div>
+          <p>O limiar de 70% serve como referência descritiva. O custo por quilômetro depende também do rendimento em km/L de cada combustível no veículo. Um agregado regional pode esconder casos locais. Na Paraíba, por exemplo, houve um mês no limiar mesmo com todos os meses do agregado Nordeste acima de 70%.</p>
+        </section>
+
+        <section id="conclusao" aria-labelledby="titulo-conclusao">
+          <h2 class="section-title" id="titulo-conclusao">4. Conclusão</h2>
+          <p>A série mensal identifica uma aceleração do preço da gasolina até o primeiro semestre de 2022, seguida de queda no segundo semestre. No recorte anual, as médias das UFs exibiram uma amplitude superior à das regiões. As diferenças na frequência da razão etanol/gasolina de até 70% também mostram como o nível geográfico escolhido afeta a interpretação.</p>
+          <p>O estudo utiliza preços nominais de revenda, agregados por mês, com cobertura que varia no tempo e por produto. A ANP registra alterações na amostra e no cálculo das médias ao longo da série, incluindo a adoção de médias ponderadas nas três escalas geográficas a partir do fim de outubro de 2004 (ANP, 2020a). Uma análise futura poderia corrigir os valores pelo IPCA e combinar os agregados com microdados por posto e rendimentos de veículos por combustível.</p>
+        </section>
+
+        <section id="fair" aria-labelledby="titulo-fair">
+          <h2 class="section-title" id="titulo-fair">5. Disponibilidade e princípios FAIR</h2>
+          <dl class="fair-list">
+            <div><dt>F · Localizável</dt><dd>O README documenta tema, palavras-chave, fonte oficial, recorte e arquivos. Os metadados da página incluem título, autoria e cobertura temporal.</dd></div>
+            <div><dt>A · Acessível</dt><dd>O artigo e os gráficos abrem no navegador sem credenciais. {{status_publicacao}}</dd></div>
+            <div><dt>I · Interoperável</dt><dd>Os dados processados usam CSV com compressão Gzip, codificação UTF-8 e chaves documentadas em <code>data/data_dictionary.md</code>.</dd></div>
+            <div><dt>R · Reutilizável</dt><dd>O código usa licença MIT. O texto e as figuras originais usam CC BY 4.0. As dependências Python têm versões fixadas, e a origem dos dados fica documentada.</dd></div>
+          </dl>
+          <p>O repositório inclui os três CSV analisados, as tabelas derivadas, o notebook e os módulos Python. O arquivo recebido não declara licença própria. A licença do código e do texto cobre os materiais produzidos para este trabalho.</p>
+          <h3>Reproduzir o pipeline</h3>
+          {{comando_clone}}
+          <p>Na pasta do projeto, com Python 3.12, execute os comandos abaixo. Ao final, abra <code>docs/index.html</code>. O README inclui os comandos equivalentes para Windows.</p>
+          <pre><code>python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m src.etl
+python -m src.artigo</code></pre>
+          <p>{{link_dados}}</p>
+        </section>
+
+        <section id="referencias" aria-labelledby="titulo-referencias">
+          <h2 class="section-title" id="titulo-referencias">6. Referências</h2>
+          <ol class="references">
+            <li>AGÊNCIA NACIONAL DO PETRÓLEO, GÁS NATURAL E BIOCOMBUSTÍVEIS (ANP). <cite>Série histórica do levantamento de preços</cite>. Brasília, DF, 2020a. Acesso em 16 nov. 2026. <a href="{{anp_url}}">Série histórica mensal da ANP</a>.</li>
+            <li>AGÊNCIA NACIONAL DO PETRÓLEO, GÁS NATURAL E BIOCOMBUSTÍVEIS (ANP). <cite>Informações sobre o levantamento de preços de combustíveis</cite>. Brasília, DF, 2020b. Acesso em 16 nov. 2026. <a href="{{anp_metodo_url}}">Histórico e metodologia da pesquisa</a>.</li>
+            <li>AGÊNCIA NACIONAL DO PETRÓLEO, GÁS NATURAL E BIOCOMBUSTÍVEIS (ANP). <cite>Boletim trimestral de preços e volumes de combustíveis</cite>. Edição 15, 3º trimestre de 2022. <a href="{{anp_boletim_url}}">Boletim da ANP</a>.</li>
+            <li>CONJUNTO DE DADOS FORNECIDO PARA A DISCIPLINA. <cite>archive.zip</cite>. [S. l.], [s. d.]. 3 arquivos CSV.</li>
+            <li>PANDAS DEVELOPMENT TEAM. <cite>pandas 2.2.3 documentation</cite>. 2024. <a href="https://pandas.pydata.org/pandas-docs/version/2.2.3/">Documentação do pandas</a>.</li>
+            <li>PLOTLY TECHNOLOGIES INC. <cite>Plotly.js JavaScript graphing library</cite>. Versão 2.30.0, 2024. <a href="https://plotly.com/javascript/">Documentação do Plotly.js</a>.</li>
+            <li>WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. <cite>Scientific Data</cite>, v. 3, art. 160018, 2016. <a href="https://doi.org/10.1038/sdata.2016.18">DOI 10.1038/sdata.2016.18</a>.</li>
+          </ol>
+        </section>
+      </article>
+    </main>
+  </div>
+  <footer><div class="wrap">
+    <span>Projeto final · Bacharelado em Sistemas de Informação</span>
+    <a href="#inicio">Voltar ao topo ↑</a>
+  </div></footer>
+  <script id="dados-artigo" type="application/json">{{dados_json}}</script>
+  <script id="plotly-fonte" type="application/octet-stream">{{plotly_gzip}}</script>
+  <script type="text/plain" id="plotly-licenca">{{plotly_licenca}}</script>
+  <script>{{javascript}}</script>
+</body>
+</html>

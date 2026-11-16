@@ -1,0 +1,222 @@
+{
+  "Brasil": {
+    "arquivo": "combustiveis-brasil.csv",
+    "sha256": "a097057959e3f2ddd955f8afb22badfdcd8cbace93c059853827d891e44a980b",
+    "linhas_brutas": 258,
+    "linhas_validas": 258,
+    "linhas_quarentena": 0,
+    "territorios": 1,
+    "primeira_referencia": "2001-07",
+    "ultima_referencia": "2023-01",
+    "meses_observados": 258,
+    "meses_ausentes": [
+      "2020-09"
+    ],
+    "cobertura": {
+      "gasolina_comum": {
+        "observados": 258,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "gasolina_aditivada": {
+        "observados": 28,
+        "ausentes": 230,
+        "primeira_referencia": "2020-10",
+        "ultima_referencia": "2023-01"
+      },
+      "etanol_hidratado": {
+        "observados": 258,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "oleo_diesel": {
+        "observados": 258,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "oleo_diesel_s10": {
+        "observados": 121,
+        "ausentes": 137,
+        "primeira_referencia": "2012-12",
+        "ultima_referencia": "2023-01"
+      },
+      "gas_cozinha_glp": {
+        "observados": 258,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "gas_natural_veicular_gnv": {
+        "observados": 258,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      }
+    }
+  },
+  "Região": {
+    "arquivo": "combustiveis-regioes.csv",
+    "sha256": "72be1e7651e65e64eb2244ff870a2640b270fb25add314171e052d4864a0c64a",
+    "linhas_brutas": 1290,
+    "linhas_validas": 1290,
+    "linhas_quarentena": 0,
+    "territorios": 5,
+    "primeira_referencia": "2001-07",
+    "ultima_referencia": "2023-01",
+    "meses_observados": 258,
+    "meses_ausentes": [
+      "2020-09"
+    ],
+    "cobertura": {
+      "gasolina_comum": {
+        "observados": 1290,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "gasolina_aditivada": {
+        "observados": 140,
+        "ausentes": 1150,
+        "primeira_referencia": "2020-10",
+        "ultima_referencia": "2023-01"
+      },
+      "etanol_hidratado": {
+        "observados": 1290,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "oleo_diesel": {
+        "observados": 1290,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "oleo_diesel_s10": {
+        "observados": 600,
+        "ausentes": 690,
+        "primeira_referencia": "2013-01",
+        "ultima_referencia": "2023-01"
+      },
+      "gas_cozinha_glp": {
+        "observados": 1290,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "gas_natural_veicular_gnv": {
+        "observados": 1215,
+        "ausentes": 75,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      }
+    }
+  },
+  "UF": {
+    "arquivo": "combustiveis-estados.csv",
+    "sha256": "44bb23eada3619fe859ede06f2ceb0ba5eb565971764f61cb901eb133ece0c6b",
+    "linhas_brutas": 6966,
+    "linhas_validas": 6950,
+    "linhas_quarentena": 16,
+    "territorios": 27,
+    "primeira_referencia": "2001-07",
+    "ultima_referencia": "2023-01",
+    "meses_observados": 258,
+    "meses_ausentes": [
+      "2020-09"
+    ],
+    "cobertura": {
+      "gasolina_comum": {
+        "observados": 6950,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "gasolina_aditivada": {
+        "observados": 752,
+        "ausentes": 6198,
+        "primeira_referencia": "2020-10",
+        "ultima_referencia": "2023-01"
+      },
+      "etanol_hidratado": {
+        "observados": 6950,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "oleo_diesel": {
+        "observados": 6947,
+        "ausentes": 3,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "oleo_diesel_s10": {
+        "observados": 3235,
+        "ausentes": 3715,
+        "primeira_referencia": "2012-12",
+        "ultima_referencia": "2023-01"
+      },
+      "gas_cozinha_glp": {
+        "observados": 6950,
+        "ausentes": 0,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      },
+      "gas_natural_veicular_gnv": {
+        "observados": 4393,
+        "ausentes": 2557,
+        "primeira_referencia": "2001-07",
+        "ultima_referencia": "2023-01"
+      }
+    },
+    "meses_ausentes_por_uf": {
+      "AC": [],
+      "AL": [],
+      "AM": [],
+      "AP": [
+        "2016-01",
+        "2016-02",
+        "2016-06",
+        "2017-08",
+        "2017-09",
+        "2017-10",
+        "2018-08",
+        "2018-12",
+        "2019-01",
+        "2019-03",
+        "2019-06",
+        "2019-07",
+        "2019-08",
+        "2020-10",
+        "2020-11",
+        "2021-01"
+      ],
+      "BA": [],
+      "CE": [],
+      "DF": [],
+      "ES": [],
+      "GO": [],
+      "MA": [],
+      "MG": [],
+      "MS": [],
+      "MT": [],
+      "PA": [],
+      "PB": [],
+      "PE": [],
+      "PI": [],
+      "PR": [],
+      "RJ": [],
+      "RN": [],
+      "RO": [],
+      "RR": [],
+      "RS": [],
+      "SC": [],
+      "SE": [],
+      "SP": [],
+      "TO": []
+    }
+  }
+}
