@@ -3,8 +3,8 @@
 ![Python 3.12](https://img.shields.io/badge/Python-3.12-136557) ![Dados mensais](https://img.shields.io/badge/Recorte-jul%2F2001%20a%20jan%2F2023-136557) ![Licença MIT](https://img.shields.io/badge/C%C3%B3digo-MIT-136557)
 
 **Autoria** · Gabriel de Moraes Ferreira Campos  
-**Curso** · Bacharelado em Sistemas de Informação, 6º período  
-**Disciplina** · Linguagem de Programação (Análise e Visualização de Dados com Python)
+**Curso** · Bacharelado em Sistemas de Informação, 8º período  
+**Disciplina** · Linguagem de Programação 
 
 O projeto analisa preços mensais de revenda em três escalas geográficas. A gasolina comum atingiu R$ 7,28/L na média nacional em maio de 2022. Entre as UFs, a distância entre as médias anuais extremas de 2022 chegou a R$ 1,03/L. No mesmo ano, o preço médio do etanol ficou em até 70% do preço da gasolina comum em 5 de 12 meses no Centro-Oeste e em 3 de 12 no Sudeste.
 
